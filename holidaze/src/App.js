@@ -1,5 +1,6 @@
 import './App.css';
 import { HamburgerIcon, ProfileIcon } from './components/icons.jsx';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
 function Header() {
   return (
@@ -22,6 +23,16 @@ function Footer() {
       <p>&copy; 2024 Holidaze</p>
     </footer>
   );
+}
+
+function Layout() {
+  return (
+    <div>
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
+  )
 }
 
 
@@ -79,16 +90,19 @@ function Home() {
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
 
       <main className="flex-1 bg-pearl">
-        <Home />
+
       </main>
 
-      <Footer />
-    </div>
-   
+      
     
+    <Routes>
+      <Route path="/" element={<Layout />}>      
+        <Route path="/" element={<Home />} />
+      </Route>  
+    </Routes>
+   </div>
   );
 }
 
