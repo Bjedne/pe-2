@@ -7,7 +7,8 @@ module.exports = {
       pearl: "#F1F2EE",
       leaf: "#4B6858",
       white: "#ffffff",
-      danger: "#B01212 "
+      danger: "#B01212",
+      black: "#000000",
     },
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
