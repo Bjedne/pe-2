@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Home() {
 
     return (
@@ -17,7 +19,9 @@ export function Home() {
               <p>Looking for a calm place in the mountains?</p>
               <p>Maybe you want to explore the city?</p>
               <p>Have a look at all the beautiful venues available!</p>
-              <button className="mt-4 px-4 py-2 bg-leaf text-white rounded-full">Browse</button>
+              <Link to="/venues">
+                <button className="mt-4 px-4 py-2 bg-leaf text-white rounded-full">Browse</button>
+              </Link>
             </div>
   
             {/* Background image */}
