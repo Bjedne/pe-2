@@ -1,11 +1,15 @@
 export function Home() {
+
     return (
       <div className="flex-1 bg-pearl">
         <h2 className="font-serif text-center mt-4 text-2xl font-bold italic">
-          Book your holidayz through Holidaze!
+          Welcome to Holidaze!
+        </h2>
+        <h2 className="font-serif text-center mt-4 text-2xl font-bold italic">
+          Book your holidays through Holidaze!
         </h2>
         
-        <div className="mb-5">
+        <div className="my-5">
           <div className="relative flex flex-col items-center text-center mx-auto w-full h-[200px] overflow-hidden">        
             
             {/* Text content and button */}
@@ -18,7 +22,7 @@ export function Home() {
   
             {/* Background image */}
             <img
-              src="/images/concrete_house.jpg"
+              src="/images/concreteHouse.jpg"
               alt="Concrete House"
               className="absolute inset-0 w-full h-full object-cover"/> { /* https://unsplash.com/photos/brown-and-white-concrete-house-uOYak90r4L0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash */ }
             <div className="absolute inset-0 h-full bg-black opacity-55"></div>
@@ -37,7 +41,7 @@ export function Home() {
   
             {/* Background image */}
             <img
-              src="/images/medieval_house.jpg"
+              src="/images/medievalHouse.jpg"
               alt="Old House"
               className="absolute inset-0 w-full h-full object-cover"/> {/* https://unsplash.com/photos/brown-2-storey-house-6fxiPO6bPpM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash */}
             <div className="absolute inset-0 h-full bg-black opacity-55"></div>
