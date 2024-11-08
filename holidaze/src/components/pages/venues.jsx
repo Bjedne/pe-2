@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchVenues } from "../../constants/api";
 import { Link } from "react-router-dom";
+import { BackButton } from "../backButton";
 import '../loader.css';
 
 const placeholderImage = "/housePlaceholder.png";
@@ -35,6 +36,7 @@ export function Venues() {
 
     return (
       <div className="flex-1 bg-pearl">
+        <BackButton />
           {venues.map((venue) => (
             <div key ={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2">
                 {venue.media.length > 0 ? (

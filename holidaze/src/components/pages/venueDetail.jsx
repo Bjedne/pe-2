@@ -2,13 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../constants/api";
 import { placeholderImage } from "../../constants/placeholder.jsx";
+import { BackButton } from "../backButton.jsx";
 import { WifiIcon, MapPinIcon, BreakfastIcon, ParkingIcon, PetIcon } from "../icons.jsx";
 
 export function VenueDetail() {
   const { id } = useParams();
   const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     async function getSingleVenue() {
@@ -17,7 +17,7 @@ export function VenueDetail() {
       setLoading(false);
     }
     getSingleVenue();
-  }, []);
+  }, [id]);
   
   if (loading) {
     return (
@@ -29,6 +29,8 @@ export function VenueDetail() {
 
   return (
     <div className="flex-1 bg-pearl">
+      <BackButton />
+      
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
@@ -37,8 +39,8 @@ export function VenueDetail() {
           </div>
         
           <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          {venue.media.length > 0 ? (
-          <img
+            {venue.media.length > 0 ? (
+              <img
                 className="rounded-xl w-full h-60 object-cover"
                 src={venue.media[0].url}
                 alt={venue.media[0].alternativeText}
@@ -50,17 +52,24 @@ export function VenueDetail() {
           </div>
 
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
-           <div className="flex justify-evenly">
-            <WifiIcon />
-            <BreakfastIcon />
-            <ParkingIcon  />
-            <PetIcon />
-           </div>
+            <div className="flex justify-evenly">
+              <div className={venue.meta.wifi ? "opacity-100" : "opacity-25"}>
+                <WifiIcon/>
+              </div>
+              <div className={venue.meta.breakfast ? "opacity-100" : "opacity-25"}> 
+                <BreakfastIcon/>
+              </div>
+              <div className={venue.meta.parking ? "opacity-100" : "opacity-25"}>
+                <ParkingIcon />
+              </div>
+              <div className={venue.meta.pets ? "opacity-100" : "opacity-25"}>
+                <PetIcon />
+                </div>
+            </div>
             <div className="flex justify-evenly items-center gap-2">
               <p>${venue.price} / night</p>
               <p>Max # of guests: {venue.maxGuests}</p>  
             </div>           
-            {/* insert rating here */}
             <p className="font-body">{venue.description}</p>
           </div>
         </div>
