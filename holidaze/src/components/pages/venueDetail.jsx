@@ -31,11 +31,10 @@ export function VenueDetail() {
     <div className="flex-1 bg-pearl">
       <BackButton />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex flex-wrap -mx-4">
-          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
-            <h1 className="text-3xl font-bold mb-4">{venue.name}</h1>
-            
+          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-4">
+            <h1 className="text-3xl font-bold mb-2">{venue.name}</h1>
             <div className="flex">
               <MapPinIcon />
               {venue.location?.address && <p>{venue.location.address}</p>}
@@ -48,11 +47,9 @@ export function VenueDetail() {
                 <p>No address available</p>
               )}
             </div>
-
-            
           </div>
         
-          <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+          <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
             {venue.media.length > 0 ? (
               <img
                 className="rounded-xl w-full h-60 object-cover"
@@ -66,7 +63,7 @@ export function VenueDetail() {
           </div>
 
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly mb-4">
               <div className={venue.meta.wifi ? "opacity-100" : "opacity-25"}>
                 <WifiIcon/>
               </div>
@@ -78,9 +75,9 @@ export function VenueDetail() {
               </div>
               <div className={venue.meta.pets ? "opacity-100" : "opacity-25"}>
                 <PetIcon />
-                </div>
+              </div>
             </div>
-            <div className="flex justify-evenly items-center gap-2">
+            <div className="flex justify-evenly items-center gap-2 mb-4">
               <p>${venue.price} / night</p>
               <p>Max # of guests: {venue.maxGuests}</p>  
             </div>           
