@@ -3,6 +3,7 @@ import { fetchVenues } from "../../constants/api";
 import { Link } from "react-router-dom";
 import { BackButton } from "../backButton";
 import '../loader.css';
+import ScrollToTop from "../scrollToTop";
 
 const placeholderImage = "/housePlaceholder.png";
 
@@ -36,6 +37,7 @@ export function Venues() {
 
     return (
       <div className="flex-1 bg-pearl">
+        <ScrollToTop />
         <BackButton />
           {venues.map((venue) => (
             <div key ={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2">
