@@ -1,9 +1,10 @@
 import './App.css';
 import { Layout } from './components/layout/outlet.jsx';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { fetchVenues } from './constants/api.jsx';
 import { Home, Venues } from './components/pages/';
 import { VenueDetail } from './components/pages/venueDetail.jsx';
+
 
 fetchVenues();
 

@@ -35,7 +35,21 @@ export function VenueDetail() {
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
             <h1 className="text-3xl font-bold mb-4">{venue.name}</h1>
-            <MapPinIcon />
+            
+            <div className="flex">
+              <MapPinIcon />
+              {venue.location?.address && <p>{venue.location.address}</p>}
+              
+              {venue.location?.city && <p>, {venue.location.city}</p>}
+              
+              {venue.location?.country && <p>, {venue.location.country}</p>}
+              
+              {!venue.location?.address && !venue.location?.city && !venue.location?.country && (
+                <p>No address available</p>
+              )}
+            </div>
+
+            
           </div>
         
           <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
