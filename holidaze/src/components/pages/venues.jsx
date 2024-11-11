@@ -3,7 +3,6 @@ import { fetchVenues } from "../../constants/api";
 import { Link } from "react-router-dom";
 import { BackButton } from "../backButton";
 import '../loader.css';
-import ScrollToTop from "../scrollToTop";
 
 const placeholderImage = "/housePlaceholder.png";
 
@@ -37,7 +36,6 @@ export function Venues() {
 
     return (
       <div className="flex-1 bg-pearl">
-        <ScrollToTop />
         <BackButton />
           {venues.map((venue) => (
             <div key ={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2">
@@ -60,7 +58,7 @@ export function Venues() {
                     <p>|</p>
                     <p>Max # of guests: {venue.maxGuests}</p>
                 </div>
-                <p className="font-body">{truncateText(venue.description, 150)}</p>
+                <p className="font-body overflow-hidden">{truncateText(venue.description, 150)}</p>
                 <div className="flex justify-between items-center">
             <div></div> {/* Empty div to push the button to the right */}
             <Link to={`/venues/${venue.id}`} className="flex">

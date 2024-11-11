@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../constants/api";
 import { placeholderImage } from "../../constants/placeholder.jsx";
 import { BackButton } from "../backButton.jsx";
+import { Calendar } from 'react-calendar';
 import { WifiIcon, MapPinIcon, BreakfastIcon, ParkingIcon, PetIcon } from "../icons.jsx";
 
 export function VenueDetail() {
   const { id } = useParams();
   const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     async function getSingleVenue() {
@@ -82,6 +85,30 @@ export function VenueDetail() {
               <p>Max # of guests: {venue.maxGuests}</p>  
             </div>           
             <p className="font-body">{venue.description}</p>
+
+            <div className="mt-8">
+              <h1 className='text-center mb-2'>Choose the date of your booking:</h1>
+              <div className='calendar-container'>
+                <Calendar onChange={setDate} value={date} selectRange={true} />
+              </div>
+              {date.length > 0 ? (
+        <p className='text-center mt-3'>
+          <span className='bold'>Start:</span>{' '}
+          {date[0].toDateString()}
+          &nbsp;|&nbsp;
+          <span className='bold'>End:</span> {date[1].toDateString()}
+        </p>
+      ) : (
+        <p className='text-center'>
+          <span className='bold'>Default selected date:</span>{' '}
+          {date.toDateString()}
+        </p>
+      )}
+            </div>
+            <div className="flex justify-center">
+              <button className="py-3 px-6 rounded-full bg-leaf text-white my-5">Book Now</button>
+            </div>
+            
           </div>
         </div>
       </div>  
