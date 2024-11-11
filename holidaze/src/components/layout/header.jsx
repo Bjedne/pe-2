@@ -11,7 +11,9 @@ export function Header() {
         </div>
         </Link>
         <div className="flex items-center gap-3 me-2">
-          <ProfileIcon />
+          <Link to="/login">
+            <ProfileIcon />
+          </Link>
           <HamburgerIcon />
         </div>
       </header>
