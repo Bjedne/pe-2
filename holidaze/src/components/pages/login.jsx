@@ -10,11 +10,11 @@ return (
       </div>
 
 
-    <Input type="text" name="full_name" className="border data-[hover]:shadow data-[focus]:bg-blue-100" >
+    <Input type="text" name="name" className="border data-[hover]:shadow data-[focus]:bg-blue-100" >
 
 
     </Input>
-    <Input type="text" name="full_name" className="border data-[hover]:shadow data-[focus]:bg-blue-100" >
+    <Input type="text" name="password" className="border data-[hover]:shadow data-[focus]:bg-blue-100" >
 
 
     </Input>

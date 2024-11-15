@@ -33,18 +33,18 @@ export function MapPinIcon() {
 
 export function BreakfastIcon() {
     return (
-        <img src="/images/breakfast.png" className="size-6"/>
+        <img src="/images/breakfast.png" className="size-6" alt=""/>
     )
 }
 
 export function ParkingIcon() {
     return (
-        <img src="/images/parking.png" className="size-6"/>
+        <img src="/images/parking.png" className="size-6" alt=""/>
     )
 }
 
 export function PetIcon() {
     return (
-        <img src="/images/pet.png" className="size-6"/>
+        <img src="/images/pet.png" className="size-6" alt=""/>
     )
 }
