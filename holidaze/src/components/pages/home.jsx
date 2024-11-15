@@ -40,7 +40,9 @@ export function Home() {
             <div className="relative top-10 z-10 text-white flex flex-col items-center mx-5">
               <p>Owner of a venue and you want to rent it out?
               Register an account and create a listing!</p>
+              <Link to="/register">
               <button className="mt-4 px-4 py-2 bg-leaf text-white rounded-full">Register</button>
+              </Link>
             </div>
   
             {/* Background image */}

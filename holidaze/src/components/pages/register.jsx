@@ -6,6 +6,7 @@ import { registerEndpoint } from "../../constants/api";
 export function Register() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", venueManager: false });
   const [errors, setErrors] = useState({ name: "", email: "", password: "", venueManager: "" });
+  const [notification, setNotification] = useState(""); // Notification message state
   const [apiError, setApiError] = useState(""); // API error message state
   const navigate = useNavigate();
 
@@ -54,7 +55,10 @@ export function Register() {
         });
 
         if (response.ok) {
-          navigate("/home");
+          setNotification("Account created! Please log in.");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } else {
           const errorData = await response.json();
           console.log(errorData);
@@ -113,7 +117,8 @@ export function Register() {
           </div>
           {errors.venueManager && <p className="text-danger">{errors.venueManager}</p>}
         </div>
-
+        
+        {notification && <p className="notification">{notification}</p>}
         {/* Error message in case there is an error with the POST request */}
         {apiError && <p className="text-danger text-center mb-4">Error: {apiError}</p>}
         

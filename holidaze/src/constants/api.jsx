@@ -1,8 +1,9 @@
-export const baseURL = "https://v2.api.noroff.dev/";
+const baseURL = "https://v2.api.noroff.dev/"
 export const bookingsEndpoint = `${baseURL}holidaze/bookings`;
 export const venuesEndpoint = `${baseURL}holidaze/venues`;
 export const profileEndpoint = `${baseURL}holidaze/profile`;
 export const registerEndpoint = `${baseURL}auth/register`;
+export const loginEndpoint = `${baseURL}auth/login?_holidaze=true`;
 
 export async function fetchVenues() {
     try {
@@ -31,4 +32,3 @@ export async function fetchVenuesById(id) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
-
