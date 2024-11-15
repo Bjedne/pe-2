@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Input } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
+import { registerEndpoint } from "../../constants/api";
 
 export function Register() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", venueManager: false });
   const [errors, setErrors] = useState({ name: "", email: "", password: "", venueManager: "" });
+  const [apiError, setApiError] = useState(""); // API error message state
   const navigate = useNavigate();
 
   const validate = () => {
@@ -40,11 +42,27 @@ export function Register() {
     return Object.values(newErrors).every((error) => error === "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError(""); // Clear any previous error messages
     if (validate()) {
-      console.log("Form submitted successfully:", formData);
-      navigate("/");
+      try {
+        const response = await fetch(registerEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          navigate("/home");
+        } else {
+          const errorData = await response.json();
+          console.log(errorData);
+          setApiError(errorData.errors[0].message || "An unexpected error occurred.");
+        }
+      } catch (error) {
+        setApiError("Unable to connect to the server. Please try again later.");
+      }
     }
   };
 
@@ -93,49 +111,52 @@ export function Register() {
               Venue Manager
             </button>
           </div>
-          {errors.venueManager && <p className="text-red-500">{errors.venueManager}</p>}
+          {errors.venueManager && <p className="text-danger">{errors.venueManager}</p>}
         </div>
 
+        {/* Error message in case there is an error with the POST request */}
+        {apiError && <p className="text-danger text-center mb-4">Error: {apiError}</p>}
+        
         <form
-          className="flex flex-col bg-white border border-neutral py-5 w-11/12 mx-auto gap-1 rounded-xl drop-shadow"
+          className="flex flex-col bg-white border border-neutral py-5 w-11/12 mx-auto gap-1 rounded-xl drop-shadow mb-8"
           onSubmit={handleSubmit}
         >
           <label htmlFor="name" className="ms-4">Name</label>
           <Input
             type="text"
             name="name"
-            className="border data-[hover]:shadow data-[focus]:bg-blue-100 mb-2 p-2 mx-4 rounded-lg"
+            className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
             placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
           />
-          {errors.name && <p className="text-red-500 ms-4">{errors.name}</p>}
+          {errors.name && <p className="text-danger ms-4">{errors.name}</p>}
 
-          <label htmlFor="email" className="ms-4">Email</label>
+          <label htmlFor="email" className="mt-2 ms-4">Email</label>
           <Input
             type="text"
             name="email"
-            className="border data-[hover]:shadow data-[focus]:bg-blue-100 mb-2 p-2 mx-4 rounded-lg"
+            className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
           />
-          {errors.email && <p className="text-red-500 ms-4">{errors.email}</p>}
+          {errors.email && <p className="text-danger ms-4">{errors.email}</p>}
 
-          <label htmlFor="password" className="ms-4">Password</label>
+          <label htmlFor="password" className="mt-2 ms-4">Password</label>
           <Input
             type="password"
             name="password"
-            className="border data-[hover]:shadow data-[focus]:bg-blue-100 mb-6 p-2 mx-4 rounded-lg"
+            className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
           />
-          {errors.password && <p className="text-red-500 ms-4">{errors.password}</p>}
+          {errors.password && <p className="text-danger ms-4">{errors.password}</p>}
 
           <button
             type="submit"
-            className="bg-leaf text-white px-4 py-2 rounded-xl border border-black w-11/12 mx-auto"
+            className="bg-leaf text-white px-4 my-4 py-2 rounded-xl border border-black w-11/12 mx-auto"
           >
             Register
           </button>

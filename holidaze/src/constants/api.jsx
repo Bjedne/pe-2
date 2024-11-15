@@ -2,6 +2,7 @@ export const baseURL = "https://v2.api.noroff.dev/";
 export const bookingsEndpoint = `${baseURL}holidaze/bookings`;
 export const venuesEndpoint = `${baseURL}holidaze/venues`;
 export const profileEndpoint = `${baseURL}holidaze/profile`;
+export const registerEndpoint = `${baseURL}auth/register`;
 
 export async function fetchVenues() {
     try {
