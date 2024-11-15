@@ -9,6 +9,7 @@ module.exports = {
       white: "#ffffff",
       danger: "#B01212",
       black: "#000000",
+      neutral: "#E3E3E3",
     },
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
