@@ -1,11 +1,7 @@
 import './App.css';
 import { Layout } from './components/layout/outlet.jsx';
 import { Routes, Route } from 'react-router-dom';
-import { fetchVenues } from './constants/api.jsx';
 import { Home, Venues, Login, VenueDetail, Register, Profile } from './components/pages/';
-
-
-fetchVenues();
 
 function App() {
   return (

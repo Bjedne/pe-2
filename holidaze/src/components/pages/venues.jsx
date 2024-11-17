@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchVenues } from "../../constants/api";
+import { fetchVenues } from "../../api/venues.jsx";
 import { Link } from "react-router-dom";
 import { BackButton } from "../backButton";
 import '../loader.css';

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchVenuesById } from "../../constants/api";
+import { fetchVenuesById } from "../../api/venues.jsx";
 import { placeholderImage } from "../../constants/placeholder.jsx";
 import { BackButton } from "../backButton.jsx";
 import { Calendar } from 'react-calendar';
