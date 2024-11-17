@@ -23,12 +23,12 @@ export function Profile() {
           </div>
         </div>
 
-        <h1>Your Bookings:</h1>
+        <h1 className="font-bold text-2xl text-center">Your Bookings:</h1>
         <div>
           {/* Booking cards */}
         </div>
 
-        <h1 className="">Your Venues:</h1>
+        <h1 className="font-bold text-2xl text-center">Your Venues:</h1>
         <div>
           {/* Venue cards */}
         </div>
