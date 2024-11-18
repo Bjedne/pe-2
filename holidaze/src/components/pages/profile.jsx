@@ -25,7 +25,7 @@ export function Profile() {
           ...options.headers, // Include the Authorization and API key headers
           "Content-Type": "application/json", 
         },
-        body: JSON.stringify({ avatarUrl: newAvatarUrl }), // Pass the avatar URL in the request body
+        body: JSON.stringify({ avatar: { url: newAvatarUrl, alt: "User Avatar",}, }), // Pass the avatar URL in the request body
       });
   
       if (!response.ok) {
@@ -35,7 +35,7 @@ export function Profile() {
   
       // Update profile and localStorage
       setProfile((prev) => ({ ...prev, avatarUrl: newAvatarUrl }));
-      localStorage.setItem('avatarUrl', newAvatarUrl);
+      localStorage.setItem("avatarUrl", newAvatarUrl);
       setShowModal(false); // Close modal
       setErrorMessage(""); // Clear errors
       window.location.reload(); // Refresh the page
