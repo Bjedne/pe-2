@@ -6,6 +6,7 @@ export function Header() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle menu visibility
+  const [closing, setClosing] = useState(false); // State to handle closing animation
 
   useEffect(() => {
     const storedAvatar = localStorage.getItem("avatarUrl");
@@ -20,7 +21,17 @@ export function Header() {
     }
   }, []);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen); // Toggle menu visibility
+  const toggleMenu = () => {
+    if (menuOpen) {
+      setClosing(true);
+      setTimeout(() => {
+        setMenuOpen(false);
+        setClosing(false);
+      }, 500); // Match the duration of the slide-up animation
+    } else {
+      setMenuOpen(true);
+    }
+  };
 
   return (
     <>
@@ -66,7 +77,7 @@ export function Header() {
 
       {/* Fullscreen Hamburger Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-pearl flex flex-col items-center text-center top-20 pt-10 z-40">
+        <div className={`fixed inset-0 bg-pearl flex flex-col items-center text-center top-20 pt-10 z-40 ${closing ? 'slide-up' : 'slide-down'}`}>
           
           <ul className="flex flex-col gap-6 text-4xl font-bold">
             <li>

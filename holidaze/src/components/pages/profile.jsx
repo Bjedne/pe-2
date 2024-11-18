@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { options, avatarUpdate } from '../../constants/api';
+import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
   const [profile, setProfile] = useState({ name: "", avatarUrl: "" });
   const [showModal, setShowModal] = useState(false);
   const [newAvatarUrl, setNewAvatarUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedName = localStorage.getItem('name');
@@ -36,9 +38,16 @@ export function Profile() {
       localStorage.setItem('avatarUrl', newAvatarUrl);
       setShowModal(false); // Close modal
       setErrorMessage(""); // Clear errors
+      window.location.reload(); // Refresh the page
     } catch (error) {
       setErrorMessage(error.message);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -58,12 +67,12 @@ export function Profile() {
           </div>
         </div>
 
-        <h1 className="font-bold text-2xl text-center">Your Bookings:</h1>
+        <h1 className="font-bold text-2xl text-center mt-6">Your Bookings:</h1>
         <div>
           {/* Booking cards */}
         </div>
 
-        <h1 className="font-bold text-2xl text-center">Your Venues:</h1>
+        <h1 className="font-bold text-2xl text-center mt-6">Your Venues:</h1>
         <div>
           {/* Venue cards */}
         </div>
@@ -102,6 +111,14 @@ export function Profile() {
           </div>
         </div>
       )}
+        {/* Log out button */}
+      <div className="flex justify-center mt-4">
+        <button
+          className="bg-danger text-white px-4 my-2 py-2 rounded-xl border border-black text-md"
+          onClick={handleLogout}>
+          Log out
+        </button>
+      </div>
     </div>
   );
 }
