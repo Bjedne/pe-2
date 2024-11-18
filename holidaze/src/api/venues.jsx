@@ -21,7 +21,6 @@ export async function fetchVenuesById(id) {
       throw new Error("Network response was not ok");
       }
       const venue = await response.json();
-      console.log(venue.data);
       return venue;
   } catch (error) {
       console.error('There was a problem with the fetch operation:', error);

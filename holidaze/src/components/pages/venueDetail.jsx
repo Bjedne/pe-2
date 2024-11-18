@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../api/venues.jsx";
+import { fetchBookings } from "../../api/bookings.jsx";
 import { placeholderImage } from "../../constants/placeholder.jsx";
 import { BackButton } from "../backButton.jsx";
 import { Calendar } from 'react-calendar';
@@ -10,18 +11,41 @@ export function VenueDetail() {
   const { id } = useParams();
   const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [bookedDates, setBookedDates] = useState([]);
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     async function getSingleVenue() {
-      const data = await fetchVenuesById(id);
-      setVenue(data.data);
-      setLoading(false);
+      try {
+        // Fetch venue details
+        const data = await fetchVenuesById(id);
+        setVenue(data.data);
+
+        // Fetch all bookings
+        const allBookings = await fetchBookings();
+        const venueBookings = allBookings.filter(booking => booking.venue.id === id);
+
+        // Extract and format booked dates
+        const dates = venueBookings.flatMap(booking => {
+          const start = new Date(booking.dateFrom);
+          const end = new Date(booking.dateTo);
+          const days = [];
+          for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
+            days.push(new Date(d));
+          }
+          return days;
+        });
+
+        setBookedDates(dates);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching venue or bookings data:", error);
+      }
     }
+
     getSingleVenue();
   }, [id]);
-  
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -29,6 +53,13 @@ export function VenueDetail() {
       </div>
     );
   }
+
+  // Disable booked dates on the calendar
+  const isDateDisabled = (date) =>
+    bookedDates.some(
+      (bookedDate) =>
+        bookedDate.toDateString() === date.toDateString()
+    );
 
   return (
     <div className="flex-1 bg-pearl">
@@ -41,11 +72,8 @@ export function VenueDetail() {
             <div className="flex">
               <MapPinIcon />
               {venue.location?.address && <p>{venue.location.address}</p>}
-              
               {venue.location?.city && <p>, {venue.location.city}</p>}
-              
               {venue.location?.country && <p>, {venue.location.country}</p>}
-              
               {!venue.location?.address && !venue.location?.city && !venue.location?.country && (
                 <p>No address available</p>
               )}
@@ -89,21 +117,26 @@ export function VenueDetail() {
             <div className="mt-8">
               <h1 className='text-center mb-2'>Choose the date of your booking:</h1>
               <div className='calendar-container'>
-                <Calendar onChange={setDate} value={date} selectRange={true} />
+                <Calendar
+                  onChange={setDate}
+                  value={date}
+                  selectRange={true}
+                  tileDisabled={({ date }) => isDateDisabled(date)}
+                />
               </div>
               {date.length > 0 ? (
-        <p className='text-center mt-3'>
-          <span className='bold'>Start:</span>{' '}
-          {date[0].toDateString()}
-          &nbsp;|&nbsp;
-          <span className='bold'>End:</span> {date[1].toDateString()}
-        </p>
-      ) : (
-        <p className='text-center'>
-          <span className='bold'>Default selected date:</span>{' '}
-          {date.toDateString()}
-        </p>
-      )}
+                <p className='text-center mt-3'>
+                  <span className='bold'>Start:</span>{' '}
+                  {date[0].toDateString()}
+                  &nbsp;|&nbsp;
+                  <span className='bold'>End:</span> {date[1].toDateString()}
+                </p>
+              ) : (
+                <p className='text-center'>
+                  <span className='bold'>Default selected date:</span>{' '}
+                  {date.toDateString()}
+                </p>
+              )}
             </div>
             <div className="flex justify-center">
               <button className="py-3 px-6 rounded-full bg-leaf text-white my-5">Book Now</button>
@@ -113,5 +146,5 @@ export function VenueDetail() {
         </div>
       </div>  
     </div>
-  )
+  );
 }

@@ -17,6 +17,7 @@ export function Venues() {
     const [venues, setVenues] = useState([]);
     const [loading, setLoading] = useState(true);
     const [visibleVenues, setVisibleVenues] = useState(24); // Track visible venues
+    const [searchQuery, setSearchQuery] = useState(""); // Track search input
 
     useEffect(() => {
         async function getVenues() {
@@ -26,6 +27,10 @@ export function Venues() {
         }
         getVenues();
     }, []);
+
+    const filteredVenues = venues.filter((venue) =>
+        venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const showMoreVenues = () => {
         setVisibleVenues((prevVisible) => prevVisible + 24); // Show 24 more venues each time
@@ -42,7 +47,16 @@ export function Venues() {
     return (
         <div className="flex-1 bg-pearl">
             <BackButton />
-            {venues.slice(0, visibleVenues).map((venue) => (
+            <div className="flex justify-center my-6">
+                <input
+                    type="text"
+                    className="w-10/12 lg:w-6/12 p-3 border border-leaf rounded-lg"
+                    placeholder="Search for a venue..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+            </div>
+            {filteredVenues.slice(0, visibleVenues).map((venue) => (
                 <div key={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2">
                     {venue.media.length > 0 ? (
                         <img
@@ -72,7 +86,7 @@ export function Venues() {
                     </div>
                 </div>
             ))}
-            {visibleVenues < venues.length && (
+            {visibleVenues < filteredVenues.length && (
                 <div className="flex justify-center mb-8">
                     <button
                         onClick={showMoreVenues}
