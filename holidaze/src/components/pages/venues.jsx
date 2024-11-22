@@ -22,6 +22,7 @@ export function Venues() {
     useEffect(() => {
         async function getVenues() {
             const data = await fetchVenues();
+            console.log(fetchVenues);
             setVenues(data.data);
             setLoading(false);
         }
