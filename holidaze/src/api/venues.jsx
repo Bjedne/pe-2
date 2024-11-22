@@ -7,7 +7,6 @@ export async function fetchVenues() {
       throw new Error('Network response was not ok');
       }
       const venues = await response.json();
-      console.log(venues);
       return venues;
   } catch (error) {
       console.error('There was a problem with the fetch operation:', error);

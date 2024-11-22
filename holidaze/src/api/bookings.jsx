@@ -1,9 +1,9 @@
-import { bookingsEndpoint, options } from "../constants/api";
+import { options, venuesEndpoint } from "../constants/api";
 
 export async function fetchBookings() {
   
   try {
-    const response = await fetch(bookingsEndpoint, {
+    const response = await fetch(venuesEndpoint, {
       method: "GET",
       headers: {
         ...options.headers,
@@ -16,7 +16,7 @@ export async function fetchBookings() {
     }
 
     const data = await response.json();
-    return data.data; // Assuming `data` contains a `data` array as per your sample response
+    return data.data;
   } catch (error) {
     console.error("Error fetching bookings:", error);
     throw error;

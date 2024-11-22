@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../api/venues.jsx";
 import { fetchBookings } from "../../api/bookings.jsx";
@@ -13,17 +13,24 @@ export function VenueDetail() {
   const [loading, setLoading] = useState(true);
   const [bookedDates, setBookedDates] = useState([]);
   const [date, setDate] = useState(new Date());
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
+    const userToken = localStorage.getItem("accessToken");
+  setLoggedIn(!!userToken);
+  
     async function getSingleVenue() {
       try {
         // Fetch venue details
         const data = await fetchVenuesById(id);
-        setVenue(data.data);
+        const venueById = data.data.find((v) => v.id === id);
+        setVenue(venueById);        
 
         // Fetch all bookings
-        const allBookings = await fetchBookings();
-        const venueBookings = allBookings.filter(booking => booking.venue.id === id);
+        const allBookings = await fetchBookings();    
+
+        const venueBookings = allBookings.filter((venue) => venue.id === id && Array.isArray(venue.bookings))
+        .flatMap((venue) => venue.bookings);
 
         // Extract and format booked dates
         const dates = venueBookings.flatMap(booking => {
@@ -45,6 +52,7 @@ export function VenueDetail() {
 
     getSingleVenue();
   }, [id]);
+
 
   if (loading) {
     return (
@@ -79,7 +87,7 @@ export function VenueDetail() {
               )}
             </div>
           </div>
-        
+
           <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
             {venue.media.length > 0 ? (
               <img
@@ -139,7 +147,15 @@ export function VenueDetail() {
               )}
             </div>
             <div className="flex justify-center">
-              <button className="py-3 px-6 rounded-full bg-leaf text-white my-5">Book Now</button>
+              {loggedIn ? (
+                <button className="py-3 px-6 rounded-full bg-leaf text-white my-5">
+                  Book Now
+                </button>
+              ) : (
+                <Link to="/login"><p className="py-3 px-6 rounded-full bg-gray-300 text-center my-5 underline">
+                  Register or log in to book
+                </p></Link>
+              )}
             </div>
             
           </div>
