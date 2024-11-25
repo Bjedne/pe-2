@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { bookingByProfile } from "../../api/bookings";
 import { options, avatarUpdate } from "../../constants/api";
 
@@ -19,12 +19,12 @@ export function Profile() {
       try {
         const data = await bookingByProfile();
         setBookings(data);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }
     }
     fetchBookings();
+
     const venueManager = localStorage.getItem('venueManager') === 'true';
     const storedName = localStorage.getItem("name");
     const storedAvatarUrl = localStorage.getItem("avatarUrl");
@@ -96,9 +96,11 @@ export function Profile() {
         
         {isVenueManager && (
           <div className="flex justify-center my-2">
-            <button className="bg-leaf text-white px-6 my-2 py-2 rounded-3xl text-md">
-              Create Venue
-            </button>
+            <Link to="/createVenue">
+              <button className="bg-leaf text-white px-6 my-2 py-2 rounded-3xl text-md">
+                Create Venue
+              </button>
+            </Link>
           </div>
       )}
 

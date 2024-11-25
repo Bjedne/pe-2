@@ -1,7 +1,7 @@
 import './App.css';
 import { Layout } from './components/layout/outlet.jsx';
 import { Routes, Route } from 'react-router-dom';
-import { Home, Venues, Login, VenueDetail, Register, Profile } from './components/pages/';
+import { Home, Venues, Login, VenueDetail, Register, Profile, CreateVenue } from './components/pages/';
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="profile" element={<Profile />} />
         <Route path="venues" element={<Venues />} />
+        <Route path="createVenue" element={<CreateVenue />} />
         <Route path="venues/:id" element={<VenueDetail />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Route>  
