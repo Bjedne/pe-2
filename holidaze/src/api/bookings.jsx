@@ -1,4 +1,4 @@
-import { options, venuesEndpoint } from "../constants/api";
+import { options, profileEndpoint, venuesEndpoint } from "../constants/api";
 
 export async function fetchBookings() {
   try {
@@ -48,4 +48,26 @@ export async function createBooking() {
     console.error("Error creating booking:", error);
     throw error;
   }
+}
+
+export async function bookingByProfile() {
+  try {
+    const response = await fetch(`${profileEndpoint}/${localStorage.getItem("name")}/bookings?_venue=true`, {
+      method: "GET",
+      headers: {
+        ...options.headers,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch bookings by profile: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+  console.error("Error fetching bookings by profile:", error);
+  throw error;
+}
 }

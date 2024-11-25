@@ -3,7 +3,7 @@ export const apiKey = process.env.REACT_APP_API_KEY;
 
 export const bookingsEndpoint = `${baseURL}holidaze/bookings?_venue=true`;
 export const venuesEndpoint = `${baseURL}holidaze/venues?_bookings=true`;
-export const profileEndpoint = `${baseURL}holidaze/profile`;
+export const profileEndpoint = `${baseURL}holidaze/profiles`;
 export const registerEndpoint = `${baseURL}auth/register`;
 export const loginEndpoint = `${baseURL}auth/login?_holidaze=true`;
 export const avatarUpdate = `${baseURL}holidaze/profiles/${localStorage.getItem('name')}`;
