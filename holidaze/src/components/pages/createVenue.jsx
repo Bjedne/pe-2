@@ -165,16 +165,8 @@ export function CreateVenue() {
           className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
           placeholder="e.g. https://www.example.com/image.jpg"
         />
-
-        <button
-          type="submit"
-          className="bg-leaf px-4 py-3 my-4 rounded-xl text-white w-1/2 mx-auto"
-        >
-          Create Venue
-        </button>
-      </form>
-
-      {/* Success and Error Messages */}
+        
+        {/* Success and Error Messages */}
       {successMessage && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
@@ -185,6 +177,16 @@ export function CreateVenue() {
           {errorMessage}
         </div>
       )}
+
+        <button
+          type="submit"
+          className="bg-leaf px-4 py-3 my-4 rounded-xl text-white w-1/2 mx-auto"
+        >
+          Create Venue
+        </button>
+      </form>
+
+      
     </div>
   );
 }
