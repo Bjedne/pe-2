@@ -1,4 +1,4 @@
-import { venuesEndpoint } from '../constants/api.jsx';
+import { venuesEndpoint, options, profileEndpoint } from '../constants/api.jsx';
 
 export async function fetchVenues() {
   try {
@@ -23,5 +23,27 @@ export async function fetchVenuesById(id) {
       return venue;
   } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
+  }
+}
+
+export async function venueByProfile() {
+  try {
+      const response = await fetch(`${profileEndpoint}/${localStorage.getItem("name")}/venues?_owner=true`, {
+      method: 'GET',
+      headers: {
+        ...options.headers,
+          'Content-Type': 'application/json',
+      },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch venues by profile: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data.data;
+} catch (error) {
+    console.error('Error fetching venues:', error);
+    throw error;
   }
 }

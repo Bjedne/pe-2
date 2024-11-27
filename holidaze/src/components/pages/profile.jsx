@@ -1,42 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { venueByProfile } from "../../api/venues";
 import { bookingByProfile } from "../../api/bookings";
 import { options, avatarUpdate } from "../../constants/api";
 
 export function Profile() {
   const [profile, setProfile] = useState({ name: "", avatarUrl: "" });
   const [bookings, setBookings] = useState([]);
-  const [showAll, setShowAll] = useState(false);
+  const [venues, setVenues] = useState([]);
+  const [showAllBookings, setShowAllBookings] = useState(false);
+  const [showAllVenues, setShowAllVenues] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [newAvatarUrl, setNewAvatarUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isVenueManager, setIsVenueManager] = useState(false);
   const navigate = useNavigate();
 
-  // Load profile from localStorage on mount
+  // Load profile and bookings/venues on mount
   useEffect(() => {
-    async function fetchBookings() {
+    async function fetchProfileData() {
       try {
-        const data = await bookingByProfile();
-        setBookings(data);
+        const bookingData = await bookingByProfile();
+        setBookings(bookingData);
+        
+        if (isVenueManager) {
+        const venueData = await venueByProfile();
+        setVenues(venueData);
+        }
+        
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }
     }
-    fetchBookings();
 
-    const venueManager = localStorage.getItem('venueManager') === 'true';
+    const venueManager = localStorage.getItem("venueManager") === "true";
     const storedName = localStorage.getItem("name");
     const storedAvatarUrl = localStorage.getItem("avatarUrl");
     if (storedName && storedAvatarUrl) {
       setProfile({ name: storedName, avatarUrl: storedAvatarUrl });
     }
-    if (storedName && storedAvatarUrl) {
-      setProfile({ name: storedName, avatarUrl: storedAvatarUrl });
-    }
 
     setIsVenueManager(venueManager);
-  }, []);
+
+    fetchProfileData();
+  }, [isVenueManager]);
 
   const handleChangeAvatar = async () => {
     try {
@@ -70,8 +77,13 @@ export function Profile() {
     window.location.reload();
   };
 
-  // Limit displayed bookings to 5 initially
-  const displayedBookings = showAll ? bookings : bookings.slice(0, 3);
+  const displayedBookings = Array.isArray(bookings) 
+  ? (showAllBookings ? bookings : bookings.slice(0, 3)) 
+  : [];
+
+const displayedVenues = Array.isArray(venues) 
+  ? (showAllVenues ? venues : venues.slice(0, 3)) 
+  : [];
 
   return (
     <div className="flex-1 bg-pearl">
@@ -93,16 +105,59 @@ export function Profile() {
             </button>
           </div>
         </div>
-        
+
         {isVenueManager && (
-          <div className="flex justify-center my-2">
-            <Link to="/createVenue">
-              <button className="bg-leaf text-white px-6 my-2 py-2 rounded-3xl text-md">
-                Create Venue
-              </button>
-            </Link>
-          </div>
-      )}
+          <>
+            <div className="flex justify-center my-2">
+              <Link to="/createVenue">
+                <button className="bg-leaf text-white px-6 my-2 py-2 rounded-3xl text-md">
+                  Create Venue
+                </button>
+              </Link>
+            </div>
+
+            <h1 className="font-bold text-2xl text-center mt-6">Your Venues:</h1>
+            {venues.length === 0 ? (
+              <p className="text-center mt-4">You have not created any venues.</p>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4">
+                  {displayedVenues.map((venue) => (
+                    <div key={venue.id} className="bg-white rounded-lg shadow p-4 flex">
+                      <img
+                        src={venue.media[0]?.url || "https://via.placeholder.com/150"}
+                        alt={venue.media[0]?.alt || "Venue Image"}
+                        className="rounded h-20 w-20 object-cover self-center"
+                      />
+                      <div className="flex flex-col ms-4">
+                        <h2 className="font-bold text-lg mt-2">{venue.name}</h2>
+                        <p className="text-sm">
+                          <strong>Price:</strong> ${venue.price} / night
+                        </p>
+                        <p className="text-sm">
+                          <strong>Max Guests:</strong> {venue.maxGuests}
+                        </p>
+                        <p className="text-sm">
+                          <strong>Location:</strong> {venue.location.address}, {venue.location.city}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {venues.length > 3 && (
+                  <div className="text-center">
+                    <button
+                      className="bg-leaf text-white px-4 py-2 rounded-xl"
+                      onClick={() => setShowAllVenues((prev) => !prev)}
+                    >
+                      {showAllVenues ? "Show Less" : "Show All"}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </>
+        )}
 
         <h1 className="font-bold text-2xl text-center mt-6">Your Bookings:</h1>
         {bookings.length === 0 ? (
@@ -111,19 +166,14 @@ export function Profile() {
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4">
               {displayedBookings.map((booking) => (
-                <div
-                  key={booking.id}
-                  className="bg-white rounded-lg shadow p-4 flex"
-                >
+                <div key={booking.id} className="bg-white rounded-lg shadow p-4 flex">
                   <img
                     src={booking.venue.media[0]?.url || "https://via.placeholder.com/150"}
                     alt={booking.venue.media[0]?.alt || "Venue Image"}
                     className="rounded h-20 w-20 object-cover self-center"
                   />
                   <div className="flex flex-col ms-4">
-                    <div>
-                      <h2 className="font-bold text-lg mt-2">{booking.venue.name}</h2>
-                    </div>
+                    <h2 className="font-bold text-lg mt-2">{booking.venue.name}</h2>
                     <p className="text-sm">
                       <strong>Guests:</strong> {booking.guests}
                     </p>
@@ -140,13 +190,13 @@ export function Profile() {
                 </div>
               ))}
             </div>
-            {bookings.length > 5 && (
+            {bookings.length > 3 && (
               <div className="text-center">
                 <button
                   className="bg-leaf text-white px-4 py-2 rounded-xl"
-                  onClick={() => setShowAll((prev) => !prev)}
+                  onClick={() => setShowAllBookings((prev) => !prev)}
                 >
-                  {showAll ? "Show Less" : "Show All"}
+                  {showAllBookings ? "Show Less" : "Show All"}
                 </button>
               </div>
             )}
@@ -185,9 +235,9 @@ export function Profile() {
         </div>
       )}
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center my-4">
         <button
-          className="bg-danger text-white px-4 my-2 py-2 rounded-xl border border-black text-md"
+          className="bg-danger text-white px-6 my-2 py-2 rounded-xl border border-black text-md"
           onClick={handleLogout}
         >
           Log out

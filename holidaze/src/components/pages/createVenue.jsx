@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@headlessui/react";
 import { venuesEndpoint, options } from "../../constants/api";
 
@@ -14,6 +15,7 @@ export function CreateVenue() {
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,6 +65,11 @@ export function CreateVenue() {
         city: "",
         image: "",
       });
+
+      setTimeout(() => {
+        navigate('/profile');
+      }, 1300);
+
     } catch (error) {
       setErrorMessage(error.message);
       setSuccessMessage("");
@@ -168,12 +175,12 @@ export function CreateVenue() {
         
         {/* Success and Error Messages */}
       {successMessage && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+        <div className="fixed left-1/2 transform -translate-x-1/2 bg-leaf text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
         </div>
       )}
       {errorMessage && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+        <div className="fixed left-1/2 transform -translate-x-1/2 bg-danger text-white px-4 py-2 rounded shadow-lg">
           {errorMessage}
         </div>
       )}
