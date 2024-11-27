@@ -127,12 +127,9 @@ export function VenueDetail() {
     );
   }
 
-
-
   return (
     <div className="flex-1 bg-pearl">
       <BackButton />
-
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-4">

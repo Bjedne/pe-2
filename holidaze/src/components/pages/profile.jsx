@@ -81,7 +81,7 @@ export function Profile() {
   ? (showAllBookings ? bookings : bookings.slice(0, 3)) 
   : [];
 
-const displayedVenues = Array.isArray(venues) 
+  const displayedVenues = Array.isArray(venues) 
   ? (showAllVenues ? venues : venues.slice(0, 3)) 
   : [];
 
@@ -123,6 +123,7 @@ const displayedVenues = Array.isArray(venues)
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4">
                   {displayedVenues.map((venue) => (
+                    <Link to={`/venues/${venue.id}`}>
                     <div key={venue.id} className="bg-white rounded-lg shadow p-4 flex">
                       <img
                         src={venue.media[0]?.url || "https://via.placeholder.com/150"}
@@ -142,6 +143,7 @@ const displayedVenues = Array.isArray(venues)
                         </p>
                       </div>
                     </div>
+                    </Link>
                   ))}
                 </div>
                 {venues.length > 3 && (
