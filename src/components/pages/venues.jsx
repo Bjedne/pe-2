@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchVenues } from "../../api/venues.jsx";
 import { Link } from "react-router-dom";
-import { BackButton } from "../backButton";
+import { BackButton } from "../backButton.jsx";
 import '../loader.css';
 
 const placeholderImage = "/housePlaceholder.png";
