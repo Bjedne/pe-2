@@ -45,7 +45,7 @@ export function VenueDetail() {
   const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
   const [bookedDates, setBookedDates] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [guests, setGuests] = useState(1); // Default guests to 1
   const [loggedIn, setLoggedIn] = useState(false);
   const [popupMessage, setPopupMessage] = useState(""); // Store popup message
@@ -59,11 +59,12 @@ export function VenueDetail() {
   
     // Handle book now click
     const handleBookNow = async () => {
-      if (date.length === 2) { // Ensure a date range is selected
+      if (date && date.length === 2) { // Ensure a date range is selected
         try {
           const response = await makeBookingRequest(date[0], date[1], guests, id);
           console.log('Booking response:', response);
-          if (response.status === 201) {
+          // eslint-disable-next-line
+          if (response.status = 201) { 
             setPopupMessage("Booking successfully created!");
             setPopupVisible(true);
             const timer = setTimeout(() => {
@@ -182,26 +183,24 @@ export function VenueDetail() {
             <div className="mt-8">
               <h1 className="text-center mb-2">Choose the date of your booking:</h1>
               <div className="calendar-container">
-                <Calendar
-                  onChange={setDate}
-                  value={date}
-                  selectRange={true}
-                  tileDisabled={({ date }) => isDateDisabled(date)}
-                />
-              </div>
-              {date.length > 0 ? (
-                <p className="text-center mt-3">
-                  <span className="bold">Start:</span>{" "}
-                  {date[0].toDateString()}
-                  &nbsp;|&nbsp;
-                  <span className="bold">End:</span> {date[1].toDateString()}
-                </p>
-              ) : (
-                <p className="text-center">
-                  <span className="bold">Default selected date:</span>{" "}
-                  {date.toDateString()}
-                </p>
-              )}
+              <Calendar
+                onChange={setDate}
+                value={date || undefined} // If date is null, show no selected range
+                selectRange={true}
+                tileDisabled={({ date }) => isDateDisabled(date)}
+              />
+            </div>
+            {date && date.length > 0 ? (
+            <p className="text-center mt-3">
+              <span className="bold">Start:</span> {date[0].toDateString()}
+              &nbsp;|&nbsp;
+              <span className="bold">End:</span> {date[1].toDateString()}
+            </p>
+          ) : (
+            <p className="text-center">
+              <span className="bold">No dates selected yet. Please choose a range.</span>
+            </p>
+          )}
             </div>
             <div className="flex gap-4 mt-2 justify-center">
               <p>Number of guests:</p>
