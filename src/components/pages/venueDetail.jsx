@@ -63,7 +63,7 @@ export function VenueDetail() {
         try {
           const response = await makeBookingRequest(date[0], date[1], guests, id);
           console.log('Booking response:', response);
-          if (response.status = 201) {
+          if (response.status === 201) {
             setPopupMessage("Booking successfully created!");
             setPopupVisible(true);
             const timer = setTimeout(() => {
