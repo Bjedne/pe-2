@@ -3,6 +3,7 @@ export const apiKey = process.env.REACT_APP_API_KEY;
 
 export const bookingsEndpoint = `${baseURL}holidaze/bookings?_venue=true`;
 export const venuesEndpoint = `${baseURL}holidaze/venues?_bookings=true`;
+export const venuesEditEndpoint = `${baseURL}holidaze/venues`;
 export const profileEndpoint = `${baseURL}holidaze/profiles`;
 export const registerEndpoint = `${baseURL}auth/register`;
 export const loginEndpoint = `${baseURL}auth/login?_holidaze=true`;
@@ -14,3 +15,5 @@ export const options = {
         "X-Noroff-API-Key": apiKey,
     }
 }
+
+export const bookingsParams = "?_bookings=true";
