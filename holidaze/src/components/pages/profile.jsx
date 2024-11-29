@@ -4,6 +4,7 @@ import { venueByProfile } from "../../api/venues";
 import { bookingByProfile } from "../../api/bookings";
 import { options, avatarUpdate } from "../../constants/api";
 import { EditIcon } from "../icons";
+import { BackButton } from "../backButton";
 
 export function Profile() {
   const [profile, setProfile] = useState({ name: "", avatarUrl: "" });
@@ -88,6 +89,7 @@ export function Profile() {
 
   return (
     <div className="flex-1 bg-pearl">
+      <BackButton />
       <div className="mt-4">
         <h1 className="text-2xl font-bold text-center mb-4">Your Profile</h1>
         <div className="flex items-center bg-white p-2 mx-auto w-11/12 rounded-xl drop-shadow">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@headlessui/react";
 import { venuesEndpoint, options } from "../../constants/api";
+import { BackButton } from "../backButton";
 
 export function CreateVenue() {
   const [formData, setFormData] = useState({
@@ -78,6 +79,7 @@ export function CreateVenue() {
 
   return (
     <div className="flex-1 bg-pearl">
+      <BackButton />
       <h1 className="text-3xl text-center mt-8">Create Venue</h1>
       <form className="flex flex-col gap-2 mb-8" onSubmit={handleSubmit}>
         <label htmlFor="name" className="ms-4">

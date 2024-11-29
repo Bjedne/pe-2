@@ -15,5 +15,3 @@ export const options = {
         "X-Noroff-API-Key": apiKey,
     }
 }
-
-export const bookingsParams = "?_bookings=true";

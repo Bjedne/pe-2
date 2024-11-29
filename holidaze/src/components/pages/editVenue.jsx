@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Input } from "@headlessui/react";
 import { venuesEditEndpoint, options } from "../../constants/api";
 import { fetchVenuesById } from "../../api/venues";
+import DeleteModal from "../modals/deleteModal";
+import { BackButton } from "../backButton";
 
 
 export function EditVenue() {
@@ -107,7 +109,11 @@ export function EditVenue() {
 
   return (
     <div className="flex-1 bg-pearl">
-      <h1 className="text-3xl text-center mt-8">Edit Venue</h1>
+      <BackButton />
+      <div className="flex">
+      <Link to={`/venueBookings/${id}`} className="bg-leaf px-4 py-3 mt-2 rounded-xl text-white w-3/4 mx-auto text-center">View bookings</Link>
+      </div>
+      <h1 className="text-3xl text-center mt-4">Edit Venue</h1>
       <form className="flex flex-col gap-2 mb-8" onSubmit={handleSubmit}>
         <label htmlFor="name" className="ms-4">
           Venue Title
@@ -220,13 +226,11 @@ export function EditVenue() {
         >
           Edit Venue
         </button>
-        <button
-          className="bg-danger px-4 py-3 my-4 rounded-xl text-white w-1/2 mx-auto"
-        >
-          Delete Venue
-        </button>
+        
       </form>
-      
+      <div className="flex flex-col">
+        <DeleteModal id={id} />
+      </div>
       
         </div>
   );
