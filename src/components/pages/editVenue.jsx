@@ -110,6 +110,7 @@ export function EditVenue() {
   return (
     <div className="flex-1 bg-pearl">
       <BackButton />
+      <div className="md:w-3/4 lg:w-1/2 md:mx-auto">
       <div className="flex">
       <Link to={`/venueBookings/${id}`} className="bg-leaf px-4 py-3 mt-2 rounded-xl text-white w-3/4 mx-auto text-center">View bookings</Link>
       </div>
@@ -232,7 +233,8 @@ export function EditVenue() {
         <DeleteModal id={id} />
       </div>
       
-        </div>
+    </div>
+  </div>
   );
 }
 

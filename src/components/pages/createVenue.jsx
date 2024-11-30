@@ -80,6 +80,7 @@ export function CreateVenue() {
   return (
     <div className="flex-1 bg-pearl">
       <BackButton />
+      <div className="md:w-3/4 lg:w-1/2 md:mx-auto">
       <h1 className="text-3xl text-center mt-8">Create Venue</h1>
       <form className="flex flex-col gap-2 mb-8" onSubmit={handleSubmit}>
         <label htmlFor="name" className="ms-4">
@@ -194,7 +195,7 @@ export function CreateVenue() {
           Create Venue
         </button>
       </form>
-
+      </div>
       
     </div>
   );
