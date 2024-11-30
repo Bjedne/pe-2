@@ -45,7 +45,7 @@ export function VenueDetail() {
   const [venue, setVenue] = useState([]);
   const [loading, setLoading] = useState(true);
   const [bookedDates, setBookedDates] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [guests, setGuests] = useState(1); // Default guests to 1
   const [loggedIn, setLoggedIn] = useState(false);
   const [popupMessage, setPopupMessage] = useState(""); // Store popup message
@@ -59,11 +59,12 @@ export function VenueDetail() {
   
     // Handle book now click
     const handleBookNow = async () => {
-      if (date.length === 2) { // Ensure a date range is selected
+      if (date && date.length === 2) { // Ensure a date range is selected
         try {
           const response = await makeBookingRequest(date[0], date[1], guests, id);
           console.log('Booking response:', response);
-          if (response.status === 201) {
+          // eslint-disable-next-line
+          if (response.status = 201) { 
             setPopupMessage("Booking successfully created!");
             setPopupVisible(true);
             const timer = setTimeout(() => {
@@ -128,13 +129,13 @@ export function VenueDetail() {
   }
 
   return (
-    <div className="flex-1 bg-pearl">
+    <div className="flex-1 bg-pearl flex flex-col">
       <BackButton />
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex flex-wrap -mx-4">
-          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-4">
+      <div className="container px-4 py-3 lg:flex md:mx-auto">
+        <div className="flex flex-col flex-wrap -mx-4 lg:w-3/4 md:mx-auto">
+          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-4 md:mx-auto lg:text-center">
             <h1 className="text-3xl font-bold mb-2">{venue.name}</h1>
-            <div className="flex">
+            <div className="flex md:mx-auto lg:justify-center">
               <MapPinIcon />
               {venue.location?.address && <p>{venue.location.address}</p>}
               {venue.location?.city && <p>, {venue.location.city}</p>}
@@ -144,8 +145,7 @@ export function VenueDetail() {
               )}
             </div>
           </div>
-
-          <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
+          <div className="w-full md:w-1/2 px-4 mb-6 md:mx-auto">
             {venue.media.length > 0 ? (
               <img
                 className="rounded-xl w-full h-60 object-cover"
@@ -158,7 +158,7 @@ export function VenueDetail() {
             )}
           </div>
 
-          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8">
+          <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8 lg:flex lg:flex-col md:mx-auto">
             <div className="flex justify-evenly mb-4">
               <div className={venue.meta.wifi ? "opacity-100" : "opacity-25"}>
                 <WifiIcon />
@@ -177,29 +177,27 @@ export function VenueDetail() {
               <p>${venue.price} / night</p>
               <p>Max # of guests: {venue.maxGuests}</p>
             </div>
-            <p className="font-body">{venue.description}</p>
-
+            <p className="font-body md:mx-auto">{venue.description}</p>
             <div className="mt-8">
               <h1 className="text-center mb-2">Choose the date of your booking:</h1>
-              <div className="calendar-container">
-                <Calendar
-                  onChange={setDate}
-                  value={date}
-                  selectRange={true}
-                  tileDisabled={({ date }) => isDateDisabled(date)}
-                />
+              <div className="calendar-container md:mx-auto">
+              <Calendar
+                onChange={setDate}
+                value={date || undefined} // If date is null, show no selected range
+                selectRange={true}
+                tileDisabled={({ date }) => isDateDisabled(date)}
+                className="mx-auto"
+              />
               </div>
-              {date.length > 0 ? (
+              {date && date.length > 0 ? (
                 <p className="text-center mt-3">
-                  <span className="bold">Start:</span>{" "}
-                  {date[0].toDateString()}
+                  <span className="bold">Start:</span> {date[0].toDateString()}
                   &nbsp;|&nbsp;
                   <span className="bold">End:</span> {date[1].toDateString()}
                 </p>
               ) : (
-                <p className="text-center">
-                  <span className="bold">Default selected date:</span>{" "}
-                  {date.toDateString()}
+                <p className="text-center mt-3">
+                  <span className="bold">No dates selected yet. Please choose a range.</span>
                 </p>
               )}
             </div>

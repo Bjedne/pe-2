@@ -9,7 +9,7 @@ export function BackButton() {
 
   return (
     <div>
-      <button onClick={goBack} className="mt-5 ms-4 underline">Go Back</button>
+      <button onClick={goBack} className="mt-5 ms-4 lg:ms-10 underline">Go Back</button>
     </div>
   );
 }
