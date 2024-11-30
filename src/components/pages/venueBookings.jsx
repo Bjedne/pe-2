@@ -8,6 +8,7 @@ export function VenueBookings() {
   const { id } = useParams();
   const [venue, setVenue] = useState([]);
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Helper function to format dates
   const formatDate = (dateString) => {
@@ -33,10 +34,19 @@ export function VenueBookings() {
       } catch (error) {
         console.error("Error fetching venue or bookings data:", error);
       }
+      setLoading(false);
     }
     getSingleVenue();
   }, [id]);
 
+  if (loading) {
+    return (
+        <div className="loader-container">
+            <img src="/logo.png" alt="Loading..." className="loader-logo" />
+        </div>
+    );
+  }
+  
   return (
     <div className="flex-1 bg-pearl">
       <BackButton />

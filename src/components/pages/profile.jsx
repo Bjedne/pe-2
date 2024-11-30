@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { venueByProfile } from "../../api/venues";
 import { bookingByProfile } from "../../api/bookings";
@@ -7,6 +7,7 @@ import { EditIcon } from "../icons";
 import { BackButton } from "../backButton";
 
 export function Profile() {
+  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState({ name: "", avatarUrl: "" });
   const [bookings, setBookings] = useState([]);
   const [venues, setVenues] = useState([]);
@@ -33,6 +34,7 @@ export function Profile() {
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }
+      setLoading(false);
     }
 
     const venueManager = localStorage.getItem("venueManager") === "true";
@@ -43,9 +45,17 @@ export function Profile() {
     }
 
     setIsVenueManager(venueManager);
-
+    
     fetchProfileData();
   }, [isVenueManager]);
+
+  if (loading) {
+    return (
+        <div className="loader-container">
+            <img src="/logo.png" alt="Loading..." className="loader-logo" />
+        </div>
+    );
+  }
 
   const handleChangeAvatar = async () => {
     try {
