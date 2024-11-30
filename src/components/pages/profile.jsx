@@ -92,7 +92,7 @@ export function Profile() {
       <BackButton />
       <div className="mt-4">
         <h1 className="text-2xl font-bold text-center mb-4">Your Profile</h1>
-        <div className="flex items-center bg-white p-2 mx-auto w-11/12 rounded-xl drop-shadow md:w-1/2 lg:w-1/4">
+        <div className="flex items-center bg-white p-2 mx-auto w-11/12 rounded-xl drop-shadow md:w-1/2 lg:w-1/3">
           <img
             src={profile.avatarUrl}
             alt="profile"
