@@ -12,10 +12,10 @@ export function Home() {
         </h2>
         
         <div className="my-5">
-          <div className="relative flex flex-col items-center text-center mx-auto w-full h-[200px] overflow-hidden">        
+          <div className="relative flex flex-col items-center text-center mx-auto w-full h-[200px] md:h-[250px] overflow-hidden">        
             
             {/* Text content and button */}
-            <div className="relative top-8 z-10 text-white flex flex-col items-center">
+            <div className="relative top-8 md:top-16 z-10 text-white flex flex-col items-center">
               <p>Looking for a calm place in the mountains?</p>
               <p>Maybe you want to explore the city?</p>
               <p>Have a look at all the beautiful venues available!</p>
@@ -34,10 +34,10 @@ export function Home() {
         </div>
   
         <div className="mb-5">
-          <div className="relative flex flex-col items-center text-center mx-auto w-full h-[200px] overflow-hidden">        
+          <div className="relative flex flex-col items-center text-center mx-auto w-full h-[200px] md:h-[250px] overflow-hidden">        
             
             {/* Text content and button */}
-            <div className="relative top-10 z-10 text-white flex flex-col items-center mx-5">
+            <div className="relative top-10 md:top-20 z-10 text-white flex flex-col items-center mx-5">
               <p>Owner of a venue and you want to rent it out?
               Register an account and create a listing!</p>
               <Link to="/register">
