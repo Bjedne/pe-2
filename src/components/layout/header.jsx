@@ -139,34 +139,69 @@ export function Header() {
 
       {/* Fullscreen Hamburger Menu */}
       {menuOpen && (
-        <div className={`fixed inset-0 bg-pearl flex flex-col items-center text-center top-20 pt-10 z-40 ${closing ? 'slide-up' : 'slide-down'}`}>
-          
+        <div
+          className={`fixed inset-0 bg-pearl flex flex-col items-center text-center top-20 pt-10 z-40 ${
+            closing ? "slide-up" : "slide-down"
+          }`}
+        >
           <ul className="flex flex-col gap-6 text-4xl font-bold">
             <li>
-              <Link to="/" onClick={toggleMenu}>
+              <Link
+                to="/"
+                className={`${
+                  location.pathname === "/" ? "text-leaf underline" : ""
+                }`}
+                onClick={toggleMenu}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/venues" onClick={toggleMenu}>
+              <Link
+                to="/venues"
+                className={`${
+                  location.pathname === "/venues" ? "text-leaf underline" : ""
+                }`}
+                onClick={toggleMenu}
+              >
                 Venues
               </Link>
             </li>
             {isLoggedIn ? (
               <li>
-                <Link to="/profile" onClick={toggleMenu}>
+                <Link
+                  to="/profile"
+                  className={`${
+                    location.pathname === "/profile" ? "text-leaf underline" : ""
+                  }`}
+                  onClick={toggleMenu}
+                >
                   Profile
                 </Link>
               </li>
             ) : (
               <>
                 <li>
-                  <Link to="/register" onClick={toggleMenu}>
+                  <Link
+                    to="/register"
+                    className={`${
+                      location.pathname === "/register"
+                        ? "text-leaf underline"
+                        : ""
+                    }`}
+                    onClick={toggleMenu}
+                  >
                     Register
                   </Link>
                 </li>
                 <li>
-                  <Link to="/login" onClick={toggleMenu}>
+                  <Link
+                    to="/login"
+                    className={`${
+                      location.pathname === "/login" ? "text-leaf underline" : ""
+                    }`}
+                    onClick={toggleMenu}
+                  >
                     Login
                   </Link>
                 </li>
