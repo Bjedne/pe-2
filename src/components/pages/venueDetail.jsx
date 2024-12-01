@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../api/venues.jsx";
-import { fetchBookings } from "../../api/bookings.jsx";
 import { placeholderImage } from "../../constants/placeholder.jsx";
 import { BackButton } from "../backButton.jsx";
 import { Calendar } from 'react-calendar';
@@ -92,13 +91,10 @@ export function VenueDetail() {
     async function getSingleVenue() {
       try {
         const data = await fetchVenuesById(id);
-        const venueById = data.data.find((v) => v.id === id);
-        setVenue(venueById);
+        const venueById = data.data;
+        const venueBookings = venueById.bookings;
 
-        const allBookings = await fetchBookings();
-        const venueBookings = allBookings
-          .filter((venue) => venue.id === id && Array.isArray(venue.bookings))
-          .flatMap((venue) => venue.bookings);
+        setVenue(venueById);
 
         const dates = venueBookings.flatMap((booking) => {
           const start = new Date(booking.dateFrom);
