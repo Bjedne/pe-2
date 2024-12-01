@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Input } from "@headlessui/react";
 import { venuesEditEndpoint, options } from "../../constants/api";
 import { fetchVenuesById } from "../../api/venues";
-import DeleteModal from "../modals/deleteModal";
+import DeleteModal from "../ui/modals";
 import { BackButton } from "../backButton";
 
 

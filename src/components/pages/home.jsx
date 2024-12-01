@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Loader } from "../ui/loader";
 
 export function Home() {
   const [loading, setLoading] = useState(true);
@@ -14,11 +15,7 @@ export function Home() {
   }, []);
 
   if (loading) {
-    return (
-        <div className="loader-container">
-            <img src="/logo.png" alt="Loading..." className="loader-logo" />
-        </div>
-    );
+    return <Loader />;
   }
 
   return (

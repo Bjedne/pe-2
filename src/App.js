@@ -3,6 +3,7 @@ import { Layout } from './components/layout/outlet.jsx';
 import { Routes, Route } from 'react-router-dom';
 import { Home, Venues, Login, VenueDetail, Register, Profile, CreateVenue, EditVenue, VenueBookings } from './components/pages/index.jsx';
 
+
 function App() {
   return (
     <div>

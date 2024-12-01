@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchVenuesById } from "../../api/venues";
 import { fetchBookings } from "../../api/bookings";
 import { BackButton } from "../backButton";
+import { Loader } from "../ui/loader";
 
 export function VenueBookings() {
   const { id } = useParams();
@@ -40,11 +41,7 @@ export function VenueBookings() {
   }, [id]);
 
   if (loading) {
-    return (
-        <div className="loader-container">
-            <img src="/logo.png" alt="Loading..." className="loader-logo" />
-        </div>
-    );
+    return <Loader />;
   }
   
   return (

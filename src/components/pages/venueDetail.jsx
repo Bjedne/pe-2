@@ -7,6 +7,7 @@ import { Calendar } from 'react-calendar';
 import { WifiIcon, MapPinIcon, BreakfastIcon, ParkingIcon, PetIcon } from "../icons.jsx";
 import { Select } from "@headlessui/react";
 import { bookingsEndpoint, options } from "../../constants/api.jsx";
+import { Loader } from "../ui/loader.jsx";
 
 // Function to send the booking request
 async function makeBookingRequest(dateFrom, dateTo, guests, venueId) {
@@ -117,11 +118,7 @@ export function VenueDetail() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="loader-container">
-        <img src="/logo.png" alt="Loading..." className="loader-logo" />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
