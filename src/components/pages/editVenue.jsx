@@ -26,7 +26,7 @@ export function EditVenue() {
   useEffect(() => {
     async function getPlaceholderInfo() {
       const data = await fetchVenuesById(id);
-      const venueById = data.data.find((v) => v.id === id);
+      const venueById = data.data;
       setPlaceholder(venueById);
   
       if (venueById) {

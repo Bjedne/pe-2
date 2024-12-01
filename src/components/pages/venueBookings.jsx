@@ -23,14 +23,10 @@ export function VenueBookings() {
     async function getSingleVenue() {
       try {
         const data = await fetchVenuesById(id);
-        const venueById = data.data.find((v) => v.id === id);
-        setVenue(venueById);
+        const venueById = data.data;
 
-        const allBookings = await fetchBookings();
-        const venueBookings = allBookings
-          .filter((venue) => venue.id === id && Array.isArray(venue.bookings))
-          .flatMap((venue) => venue.bookings);
-        setBookings(venueBookings);
+        setVenue(venueById);
+        setBookings(venueById.bookings);
       } catch (error) {
         console.error("Error fetching venue or bookings data:", error);
       }
