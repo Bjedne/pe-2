@@ -56,8 +56,9 @@ export function Venues() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
             </div>
+            <div className="md:grid md:grid-cols-2">
             {filteredVenues.slice(0, visibleVenues).map((venue) => (
-                <div key={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2">
+                <div key={venue.id} className="flex flex-col w-10/12 mx-auto my-6 border-white border-2 rounded-xl p-2 bg-white drop-shadow-lg gap-2 md:px-6">
                     {venue.media.length > 0 ? (
                         <img
                             className="rounded-xl w-full h-60 object-cover"
@@ -86,6 +87,7 @@ export function Venues() {
                     </div>
                 </div>
             ))}
+            </div>
             {visibleVenues < filteredVenues.length && (
                 <div className="flex justify-center mb-8">
                     <button

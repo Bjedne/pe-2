@@ -1,4 +1,4 @@
-import { venuesEndpoint, options, profileEndpoint } from '../constants/api.jsx';
+import { venuesEndpoint, options, profileEndpoint, venuesDetailEndpoint } from '../constants/api.jsx';
 
 export async function fetchVenues() {
   try {
@@ -15,7 +15,7 @@ export async function fetchVenues() {
 
 export async function fetchVenuesById(id) {
   try {
-      const response = await fetch(`${venuesEndpoint}/${id}`);
+      const response = await fetch(`${venuesDetailEndpoint}/${id}?_bookings=true`);
       if (!response.ok) {
       throw new Error("Network response was not ok");
       }

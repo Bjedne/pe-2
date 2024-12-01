@@ -123,7 +123,7 @@ export function Register() {
         {apiError && <p className="text-danger text-center mb-4">Error: {apiError}</p>}
         
         <form
-          className="flex flex-col bg-white border border-neutral py-5 w-11/12 mx-auto gap-1 rounded-xl drop-shadow mb-8"
+          className="flex flex-col bg-white border border-neutral py-5 w-80 mx-auto gap-1 rounded-xl drop-shadow mb-8"
           onSubmit={handleSubmit}
         >
           <label htmlFor="name" className="ms-4">Name</label>
