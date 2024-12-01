@@ -15,9 +15,9 @@ export function Register() {
 
     // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required.";
+      newErrors.name = "Username is required.";
     } else if (/[^a-zA-Z0-9_ ]/.test(formData.name)) {
-      newErrors.name = "Name can only contain letters, numbers, spaces, and underscores.";
+      newErrors.name = "Username can only contain letters, numbers, spaces, and underscores.";
     }
 
     // Email validation
@@ -125,12 +125,12 @@ export function Register() {
           className="flex flex-col bg-white border border-neutral py-5 w-80 mx-auto gap-1 rounded-xl drop-shadow mb-8"
           onSubmit={handleSubmit}
         >
-          <label htmlFor="name" className="ms-4">Name</label>
+          <label htmlFor="name" className="ms-4">Username</label>
           <Input
             type="text"
             name="name"
             className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
-            placeholder="Full Name"
+            placeholder="e.g. Frank_123"
             value={formData.name}
             onChange={handleChange}
           />
@@ -141,7 +141,7 @@ export function Register() {
             type="text"
             name="email"
             className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
-            placeholder="Email"
+            placeholder="e.g. frank123@stud.noroff.no"
             value={formData.email}
             onChange={handleChange}
           />
@@ -152,7 +152,7 @@ export function Register() {
             type="password"
             name="password"
             className="border data-[hover]:shadow data-[focus]:bg-blue-100 p-2 mx-4 rounded-lg"
-            placeholder="Password"
+            placeholder="Must be at least 8 characters"
             value={formData.password}
             onChange={handleChange}
           />

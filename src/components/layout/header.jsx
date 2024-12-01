@@ -97,16 +97,6 @@ export function Header() {
                   Register
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/login"
-                  className={`${
-                    location.pathname === "/login" ? "bg-leaf drop-shadow-md border-2 border-leaf p-2 rounded-md" : ""
-                  }`}
-                >
-                  Login
-                </Link>
-              </li>
             </>
           )}
         </ul>
