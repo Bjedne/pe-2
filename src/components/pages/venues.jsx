@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchVenues } from "../../api/venues.jsx";
 import { Link } from "react-router-dom";
-import { BackButton } from "../backButton.jsx";
-import '../loader.css';
+import { BackButton, Loader } from "../ui/index.jsx";
+import '../ui/loader.css';
 
 const placeholderImage = "/housePlaceholder.png";
 
@@ -37,11 +37,7 @@ export function Venues() {
     };
 
     if (loading) {
-        return (
-            <div className="loader-container">
-                <img src="/logo.png" alt="Loading..." className="loader-logo" />
-            </div>
-        );
+        return <Loader />;
     }
 
     return (

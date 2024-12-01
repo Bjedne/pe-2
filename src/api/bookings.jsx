@@ -69,5 +69,4 @@ export async function bookingByProfile() {
   } catch (error) {
   console.error("Error fetching bookings by profile:", error);
   throw error;
-}
-}
+}}
