@@ -53,6 +53,22 @@ npm run start
 npm run build
 ```
 
+## Running Tests
+
+To run the tests for this project, follow these steps:
+
+1. **Ensure you have all dependencies installed**:
+
+```
+npm install
+```
+
+2. **Run the tests:**
+
+```
+npm test
+```
+
 ## Contact
 
 Feel free to reach out to my through my socials if you have any questions!
