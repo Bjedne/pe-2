@@ -2,12 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../api/venues.jsx";
 import { placeholderImage } from "../../constants/placeholder.jsx";
-import { BackButton } from "../ui/backButton.jsx";
-import { Calendar } from 'react-calendar';
-import { WifiIcon, MapPinIcon, BreakfastIcon, ParkingIcon, PetIcon } from "../icons.jsx";
+import { BackButton, Amenities, Loader } from "../ui/index.jsx";
+import { MapPinIcon } from "../icons.jsx";
 import { Select } from "@headlessui/react";
 import { bookingsEndpoint, options } from "../../constants/api.jsx";
-import { Loader } from "../ui/loader.jsx";
 import { BookingSection } from "../booking/BookingSection.jsx";
 
 // Function to send the booking request
@@ -52,12 +50,6 @@ export function VenueDetail() {
   const [popupMessage, setPopupMessage] = useState(""); // Store popup message
   const [popupVisible, setPopupVisible] = useState(false);
 
-    // Disable booked dates on the calendar
-    const isDateDisabled = (date) =>
-      bookedDates.some(
-        (bookedDate) => bookedDate.toDateString() === date.toDateString()
-      );
-  
     // Handle book now click
     const handleBookNow = async () => {
       if (date && date.length === 2) { // Ensure a date range is selected
@@ -152,20 +144,7 @@ export function VenueDetail() {
           </div>
 
           <div className="w-full md:w-1/2 lg:w-2/3 px-4 mb-8 lg:flex lg:flex-col md:mx-auto">
-            <div className="flex justify-evenly mb-4">
-              <div className={venue.meta.wifi ? "opacity-100" : "opacity-25"}>
-                <WifiIcon />
-              </div>
-              <div className={venue.meta.breakfast ? "opacity-100" : "opacity-25"}>
-                <BreakfastIcon />
-              </div>
-              <div className={venue.meta.parking ? "opacity-100" : "opacity-25"}>
-                <ParkingIcon />
-              </div>
-              <div className={venue.meta.pets ? "opacity-100" : "opacity-25"}>
-                <PetIcon />
-              </div>
-            </div>
+            <Amenities venue={venue} />
             <div className="flex justify-evenly items-center gap-2 mb-4">
               <p>${venue.price} / night</p>
               <p>Max # of guests: {venue.maxGuests}</p>

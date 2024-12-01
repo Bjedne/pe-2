@@ -4,7 +4,7 @@ import { venueByProfile } from "../../api/venues";
 import { bookingByProfile } from "../../api/bookings";
 import { options, avatarUpdate } from "../../constants/api";
 import { EditIcon } from "../icons";
-import { BackButton } from "../ui/backButton";
+import { BackButton, Loader } from "../ui/index.jsx";
 
 export function Profile() {
   const [loading, setLoading] = useState(true);
@@ -50,11 +50,7 @@ export function Profile() {
   }, [isVenueManager]);
 
   if (loading) {
-    return (
-        <div className="loader-container">
-            <img src="/logo.png" alt="Loading..." className="loader-logo" />
-        </div>
-    );
+    return <Loader />;
   }
 
   const handleChangeAvatar = async () => {
@@ -128,42 +124,41 @@ export function Profile() {
                 </button>
               </Link>
             </div>
-
             <h1 className="font-bold text-2xl text-center mt-6">Your Venues:</h1>
             {venues.length === 0 ? (
               <p className="text-center mt-4">You have not created any venues.</p>
             ) : (
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4">
-  {displayedVenues.map((venue) => (
-    <Link to={`/venues/${venue.id}`} key={venue.id}>
-      <div className="bg-white rounded-lg shadow p-4 flex flex-col relative">
-        <Link to={`/editVenue/${venue.id}`}>
-          <EditIcon />
-        </Link>
-        <div className="flex">
-          <img
-            src={venue.media[0]?.url || "https://via.placeholder.com/150"}
-            alt={venue.media[0]?.alt || "Venue Image"}
-            className="rounded h-20 w-20 object-cover self-center"
-          />
-          <div className="flex flex-col ms-4">
-            <h2 className="font-bold text-lg mt-2">{venue.name}</h2>
-            <p className="text-sm">
-              <strong>Price:</strong> ${venue.price} / night
-            </p>
-            <p className="text-sm">
-              <strong>Max Guests:</strong> {venue.maxGuests}
-            </p>
-            <p className="text-sm">
-              <strong>Location:</strong> {venue.location.address}, {venue.location.city}
-            </p>
-          </div>
-        </div>
-      </div>
-    </Link>
-  ))}
-</div>
+                  {displayedVenues.map((venue) => (
+                    <Link to={`/venues/${venue.id}`} key={venue.id}>
+                      <div className="bg-white rounded-lg shadow p-4 flex flex-col relative">
+                        <Link to={`/editVenue/${venue.id}`}>
+                          <EditIcon />
+                        </Link>
+                        <div className="flex">
+                          <img
+                            src={venue.media[0]?.url || "https://via.placeholder.com/150"}
+                            alt={venue.media[0]?.alt || "Venue Image"}
+                            className="rounded h-20 w-20 object-cover self-center"
+                          />
+                          <div className="flex flex-col ms-4">
+                            <h2 className="font-bold text-lg mt-2">{venue.name}</h2>
+                            <p className="text-sm">
+                              <strong>Price:</strong> ${venue.price} / night
+                            </p>
+                            <p className="text-sm">
+                              <strong>Max Guests:</strong> {venue.maxGuests}
+                            </p>
+                            <p className="text-sm">
+                              <strong>Location:</strong> {venue.location.address}, {venue.location.city}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
 
                 {venues.length > 3 && (
                   <div className="text-center">

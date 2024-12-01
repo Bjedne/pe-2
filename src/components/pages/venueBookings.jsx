@@ -48,22 +48,21 @@ export function VenueBookings() {
     <div className="flex-1 bg-pearl">
       <BackButton />
       <div className="flex justify-center mt-4">
-  <div className="max-w-sm rounded-lg shadow-lg overflow-hidden bg-white">
-    <img
-      src={venue.media?.[0]?.url}
-      alt={`${venue.name} media`}
-      className="h-48 w-full object-cover"
-    />
-    <div className="p-4">
-      <h1 className="text-xl font-bold">{venue.name || "No Name Available"}</h1>
-      <p className="text-sm mt-2">
-        <strong>Address:</strong> {venue.location?.address || "No Address Available"}
-      </p>
-    </div>
-  </div>
-</div>
-
-<h2 className="font-bold text-2xl text-center mt-4">Bookings</h2>
+        <div className="max-w-sm rounded-lg shadow-lg overflow-hidden bg-white">
+          <img
+            src={venue.media?.[0]?.url}
+            alt={`${venue.name} media`}
+            className="h-48 w-full object-cover"
+          />
+          <div className="p-4">
+            <h1 className="text-xl font-bold">{venue.name || "No Name Available"}</h1>
+            <p className="text-sm mt-2">
+              <strong>Address:</strong> {venue.location?.address || "No Address Available"}
+            </p>
+          </div>
+        </div>
+      </div>
+      <h2 className="font-bold text-2xl text-center mt-4">Bookings</h2>
       <div className="flex flex-col gap-3 mb-8 lg:flex-row lg:flex-wrap lg:mt-6 lg:w-8/12 lg:mx-auto">
         {bookings.map((booking) => (
           <div key={booking.id} className="bg-white mx-4 px-2 py-2 font-body rounded-2xl drop-shadow  mx-auto">

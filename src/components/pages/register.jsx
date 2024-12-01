@@ -88,7 +88,6 @@ export function Register() {
             already registered? <Link to="/login" className="underline">Log in</Link>
           </p>
         </div>
-
         <div className="flex flex-col flex-wrap mx-auto gap-2 mb-8">
           <h2 className="flex-1">Please choose an account type:</h2>
           <div className="flex gap-5">

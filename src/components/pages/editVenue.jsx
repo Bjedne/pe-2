@@ -6,7 +6,6 @@ import { fetchVenuesById } from "../../api/venues";
 import DeleteModal from "../ui/modals";
 import { BackButton } from "../ui/backButton";
 
-
 export function EditVenue() {
   const [formData, setFormData] = useState({
     name: "",
@@ -45,7 +44,6 @@ export function EditVenue() {
     getPlaceholderInfo();
   }, [id]);
   
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -104,8 +102,6 @@ export function EditVenue() {
       setSuccessMessage("");
     }
   };
-
-  
 
   return (
     <div className="flex-1 bg-pearl">
@@ -237,4 +233,3 @@ export function EditVenue() {
   </div>
   );
 }
-
