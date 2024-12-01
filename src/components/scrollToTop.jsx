@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 // This component is used to scroll to the top of the page when a new page is loaded.
-
 export default function ScrollToTop() {
   const { pathname } = useLocation();
 

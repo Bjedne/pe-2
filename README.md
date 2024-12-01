@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Holidaze
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Holidaze is a comprehensive web application designed to help users find and book holiday venues. Whether you're looking for a serene mountain retreat or a bustling city apartment, Holidaze has a wide range of options to suit your needs. Venue managers can also register and list their properties, making it easy to manage bookings and reach a wider audience.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication**: "Secure" login and registration for users and venue managers.
+- **Venue Listings**: Browse through a variety of venues with detailed descriptions, images, and amenities.
+- **Booking Management**: Users can book venues, and venue managers can view bookings on their venues.
+- **Profile Management**: Users can update their profiles by changing their avatar.
+- **Responsive Design**: The application is fully responsive, ensuring a seamless experience on both desktop and mobile devices.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**: A JavaScript library for building user interfaces.
+- **React Router**: For handling routing within the application.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **Headless UI**: Unstyled, fully accessible UI components.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To get started with the project, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository:**
 
-### `npm run build`
+```
+git clone https://github.com/your-username/holidaze.git
+cd holidaze
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Create a .env file** in the root directory and add your evironment variables:
 
-### `npm run eject`
+```
+REACT_APP_BASE_URL=base_url_here
+REACT_APP_API_KEY=your_api_key_here
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Start the development server:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm run start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. **Build the project for production:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+npm run build
+```
 
-## Learn More
+## Running Tests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To run the tests for this project, follow these steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Ensure you have all dependencies installed**:
 
-### Code Splitting
+```
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. **Run the tests:**
 
-### Analyzing the Bundle Size
+```
+npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contact
 
-### Making a Progressive Web App
+Feel free to reach out to my through my socials if you have any questions!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[My LinkedIn page](https://www.linkedin.com/in/bj%C3%B8rnar-jakobsen-3176a5261/)
