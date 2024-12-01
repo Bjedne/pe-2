@@ -181,9 +181,7 @@ export function VenueDetail() {
         setGuests={setGuests}
         loggedIn={loggedIn}
         onBookNow={handleBookNow}
-      />
-
-
+            />
             <div className="flex gap-4 mt-2 justify-center">
               <p>Number of guests:</p>
               <Select
