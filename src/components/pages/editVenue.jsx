@@ -4,7 +4,7 @@ import { Input } from "@headlessui/react";
 import { venuesEditEndpoint, options } from "../../constants/api";
 import { fetchVenuesById } from "../../api/venues";
 import DeleteModal from "../ui/modals";
-import { BackButton } from "../backButton";
+import { BackButton } from "../ui/backButton";
 
 
 export function EditVenue() {

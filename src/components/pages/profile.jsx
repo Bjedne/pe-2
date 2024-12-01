@@ -4,7 +4,7 @@ import { venueByProfile } from "../../api/venues";
 import { bookingByProfile } from "../../api/bookings";
 import { options, avatarUpdate } from "../../constants/api";
 import { EditIcon } from "../icons";
-import { BackButton } from "../backButton";
+import { BackButton } from "../ui/backButton";
 
 export function Profile() {
   const [loading, setLoading] = useState(true);

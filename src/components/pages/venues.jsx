@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchVenues } from "../../api/venues.jsx";
 import { Link } from "react-router-dom";
-import { BackButton } from "../backButton.jsx";
+import { BackButton } from "../ui/backButton.jsx";
 import '../ui/loader.css';
 import { Loader } from "../ui/loader.jsx";
 

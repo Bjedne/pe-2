@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchVenuesById } from "../../api/venues";
 import { fetchBookings } from "../../api/bookings";
-import { BackButton } from "../backButton";
+import { BackButton } from "../ui/backButton";
 import { Loader } from "../ui/loader";
 
 export function VenueBookings() {

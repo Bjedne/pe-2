@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@headlessui/react";
 import { venuesEndpoint, options } from "../../constants/api";
-import { BackButton } from "../backButton";
+import { BackButton } from "../ui/backButton";
 
 export function CreateVenue() {
   const [formData, setFormData] = useState({

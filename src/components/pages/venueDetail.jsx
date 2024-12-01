@@ -2,12 +2,13 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchVenuesById } from "../../api/venues.jsx";
 import { placeholderImage } from "../../constants/placeholder.jsx";
-import { BackButton } from "../backButton.jsx";
+import { BackButton } from "../ui/backButton.jsx";
 import { Calendar } from 'react-calendar';
 import { WifiIcon, MapPinIcon, BreakfastIcon, ParkingIcon, PetIcon } from "../icons.jsx";
 import { Select } from "@headlessui/react";
 import { bookingsEndpoint, options } from "../../constants/api.jsx";
 import { Loader } from "../ui/loader.jsx";
+import { BookingSection } from "../booking/BookingSection.jsx";
 
 // Function to send the booking request
 async function makeBookingRequest(dateFrom, dateTo, guests, venueId) {
@@ -113,7 +114,6 @@ export function VenueDetail() {
         console.error("Error fetching venue or bookings data:", error);
       }
     }
-
     getSingleVenue();
   }, [id]);
 
@@ -171,29 +171,19 @@ export function VenueDetail() {
               <p>Max # of guests: {venue.maxGuests}</p>
             </div>
             <p className="font-body md:mx-auto">{venue.description}</p>
-            <div className="mt-8">
-              <h1 className="text-center mb-2">Choose the date of your booking:</h1>
-              <div className="calendar-container md:mx-auto">
-              <Calendar
-                onChange={setDate}
-                value={date || undefined} // If date is null, show no selected range
-                selectRange={true}
-                tileDisabled={({ date }) => isDateDisabled(date)}
-                className="mx-auto"
-              />
-              </div>
-              {date && date.length > 0 ? (
-                <p className="text-center mt-3">
-                  <span className="bold">Start:</span> {date[0].toDateString()}
-                  &nbsp;|&nbsp;
-                  <span className="bold">End:</span> {date[1].toDateString()}
-                </p>
-              ) : (
-                <p className="text-center mt-3">
-                  <span className="bold">No dates selected yet. Please choose a range.</span>
-                </p>
-              )}
-            </div>
+            
+            <BookingSection
+        venue={venue}
+        bookedDates={bookedDates}
+        date={date}
+        setDate={setDate}
+        guests={guests}
+        setGuests={setGuests}
+        loggedIn={loggedIn}
+        onBookNow={handleBookNow}
+      />
+
+
             <div className="flex gap-4 mt-2 justify-center">
               <p>Number of guests:</p>
               <Select
